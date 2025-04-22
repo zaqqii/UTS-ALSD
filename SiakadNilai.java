@@ -16,6 +16,7 @@ public class SiakadNilai {
             System.out.println("3. Tampilkan Data Penilaian");
             System.out.println("4. Urutkan Mahasiswa Berdasarkan Nilai Akhir");
             System.out.println("5. Cari Mahasiswa Berdasarkan NIM");
+            System.out.println("6. Urutkan Mata Kuliah berdasarkan SKS");
             System.out.println("0. Keluar");
             System.out.print("Pilih menu: ");
             pilihan = sc.nextInt();
@@ -27,6 +28,7 @@ public class SiakadNilai {
                 case 3 -> tampilkanPenilaian();
                 case 4 -> urutkanNilaiAkhir();
                 case 5 -> cariMahasiswa();
+                case 6 -> urutkanMatkulBerdasarkanSKS();
                 case 0 -> System.out.println("Terima kasih!");
                 default -> System.out.println("Pilihan tidak valid.");
             }
@@ -34,26 +36,36 @@ public class SiakadNilai {
     }
 
     static void inisialisasiData() {
-        // Mata kuliah
+     
         daftarMatkul.add(new MataKuliah("MK001", "Struktur Data", 3));
         daftarMatkul.add(new MataKuliah("MK002", "Basis Data", 3));
         daftarMatkul.add(new MataKuliah("MK003", "Desain Web", 3));
+        daftarMatkul.add(new MataKuliah("MK004", "Pemrograman Web", 2));
+        daftarMatkul.add(new MataKuliah("MK005", "Sistem Operasi", 2));
 
-        // Mahasiswa
+        
         Mahasiswa m1 = new Mahasiswa("22001", "Ali Rahman", "Informatika");
         Mahasiswa m2 = new Mahasiswa("22002", "Budi Santoso", "Informatika");
         Mahasiswa m3 = new Mahasiswa("22003", "Citra Dewi", "Sistem Informasi Bisnis");
+        Mahasiswa m4 = new Mahasiswa("22004", "Dewi Lestari", "Sistem Informasi Bisnis");
+        Mahasiswa m5 = new Mahasiswa("22005", "Eka Kurniawan", "Informatika");
 
         daftarMahasiswa.add(m1);
         daftarMahasiswa.add(m2);
         daftarMahasiswa.add(m3);
+        daftarMahasiswa.add(m4);
+        daftarMahasiswa.add(m5);
 
-        // Penilaian
         daftarPenilaian.add(new Penilaian(m1, daftarMatkul.get(0), 80, 85, 90));
         daftarPenilaian.add(new Penilaian(m1, daftarMatkul.get(1), 60, 75, 70));
         daftarPenilaian.add(new Penilaian(m2, daftarMatkul.get(0), 75, 70, 80));
         daftarPenilaian.add(new Penilaian(m3, daftarMatkul.get(1), 85, 90, 95));
         daftarPenilaian.add(new Penilaian(m3, daftarMatkul.get(2), 80, 90, 65));
+        daftarPenilaian.add(new Penilaian(m4, daftarMatkul.get(3), 75, 80, 85));
+        daftarPenilaian.add(new Penilaian(m4, daftarMatkul.get(4), 85, 90, 95));
+        daftarPenilaian.add(new Penilaian(m5, daftarMatkul.get(0), 70, 75, 80));
+        daftarPenilaian.add(new Penilaian(m5, daftarMatkul.get(1), 80, 85, 90));
+
     }
 
     static void tampilkanMahasiswa() {
@@ -106,4 +118,16 @@ public class SiakadNilai {
             System.out.println("Mahasiswa Ditemukan: NIM " + nim + " tidak ditemukan.");
         }
     }
+
+    static void urutkanMatkulBerdasarkanSKS() {
+        daftarMatkul.sort(Comparator.comparingInt(mk -> mk.sks));
+    
+        System.out.println("\nDaftar Mata Kuliah setelah diurutkan berdasarkan SKS (terkecil ke terbesar):");
+        for (MataKuliah mk : daftarMatkul) {
+            mk.tampilMatakuliah();
+        }
+    }
+    
 }
+
+
